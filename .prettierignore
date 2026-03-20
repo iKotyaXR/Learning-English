@@ -1,0 +1,10 @@
+# игнор файлов
+*.sh
+*.log
+*.env
+dist
+build
+coverage
+
+# или конкретный файл
+path/to/file
