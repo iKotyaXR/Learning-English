@@ -1,22 +1,20 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export const stateSlice = createSlice({
-    name: 'state',
+    name: "state",
     initialState: {
         isNative: false,
-        savedCards: [] as string[]
+        savedCards: [] as string[],
     },
     reducers: {
         toggleIsNative: (state) => {
             state.isNative = !state.isNative;
         },
 
+        addCard: (state, action) => {
+            state.savedCards = [...state.savedCards, ...action.payload];
+        },
+    },
+});
 
-        addCard: (state,action)=>{
-            state.savedCards = [...state.savedCards,...action.payload];
-        }
-    }
-})
-
-
-export const { toggleIsNative, addCard} = stateSlice.actions
+export const { toggleIsNative, addCard } = stateSlice.actions;
