@@ -1,33 +1,33 @@
 name: Deploy to FTP
 
 on:
-    push:
-        branches: ["master"]
+  push:
+    branches: ['master']
 
 jobs:
-    deploy:
-        runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-latest
 
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-            - name: Setup Node
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 20
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
-            - name: Install deps
-              run: yarn install --frozen-lockfile
+      - name: Install deps
+        run: yarn install --frozen-lockfile
 
-            - name: Build
-              run: yarn build
+      - name: Build
+        run: yarn build
 
-            - name: Deploy via FTP
-              uses: SamKirkland/FTP-Deploy-Action@v4.3.6
-              with:
-                  server: ${{ secrets.FTP_HOST }}
-                  username: ${{ secrets.FTP_USER }}
-                  password: ${{ secrets.FTP_PASSWORD }}
-                  local-dir: dist/
-                  server-dir: ${{ secrets.FTP_DIR }}
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: dist/
+          server-dir: ${{ secrets.FTP_DIR }}
